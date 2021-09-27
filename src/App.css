@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#root {
+  color: #303030;
+  display: flex;
+  justify-content: center;
+  --main-color: #4a6f87;
+}
+
+.App {
+  width: 800px;
+}
+
+.post {
+  display: flex;
+  padding: 15px;
+  margin-top: 15px;
+  border: 2px solid var(--main-color);
+  justify-content: space-between;
+  align-items: center;
+}
