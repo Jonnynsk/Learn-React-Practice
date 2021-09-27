@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 
 import './App.css'
 
@@ -17,12 +18,27 @@ const App = () => {
     setPosts([...posts, newPost])
   }
 
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+  }
+
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList posts={posts} />
+      {posts.length
+        ? <PostList remove={removePost} posts={posts} />
+        : <Header>Посты не найдены...</Header>
+      }
+      
     </div>
   )
 }
 
 export default App
+
+
+const Header = styled.h1`
+    text-align: center;
+    color: #4a6f87;
+    margin-top: 30px;
+`

@@ -2,12 +2,15 @@ import styled from 'styled-components'
 
 import PostItem from "./PostItem"
 
-const PostList = (props) => {
+const PostList = ({posts, remove}) => {
     return (
         <div>
             <Header>Список постов:</Header>
-            {props.posts.map((post, index) =>
-                <PostItem key={post.id} number={index + 1} post={post} />
+            {posts.map((post, index) =>
+                <PostItem key={post.id} 
+                          number={index + 1} 
+                          post={post} 
+                          remove={remove} />
             )}
         </div>
     )
