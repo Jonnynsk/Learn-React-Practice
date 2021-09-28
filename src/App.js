@@ -5,6 +5,7 @@ import './App.css'
 
 import PostForm from './components/PostForm'
 import PostList from './components/PostList'
+import MySelect from './components/UI/MySelect'
 
 const App = () => {
 
@@ -14,6 +15,8 @@ const App = () => {
     { id: 3, title: 'Redux', body: 'и это язык программирования' }
   ])
 
+  const [selectedSort, setSelectedSort] = useState('')
+
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
   }
@@ -22,14 +25,31 @@ const App = () => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
+  const sortPosts = (sort) => {
+    setSelectedSort(sort)
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
+  }
+
   return (
     <div className="App">
       <PostForm create={createPost} />
+      <hr style={{ margin: '15px 0' }} />
+      <div>
+        <MySelect
+          value={selectedSort}
+          onChange={sortPosts}
+          defaultValue='Сортировка'
+          options={[
+            { value: 'title', name: 'по названию' },
+            { value: 'body', name: 'по описанию' },
+          ]}
+        />
+      </div>
       {posts.length
         ? <PostList remove={removePost} posts={posts} />
         : <Header>Посты не найдены...</Header>
       }
-      
+
     </div>
   )
 }
